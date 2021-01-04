@@ -30,12 +30,27 @@ module Actions
         end
     end
 
-    def position_is_valid?(state, next_position)
+    def position_is_valid?(state, position)
+        # Verificar que la posición esté dentro del Grid
+        if ((position.row < state.grid.rows && position.row >= 0) || 
+            (position.col < state.grid.cols && position.col >= 0))
+            return true
+        end
+        # Verificar que la posición no se superponga a la serpiente
+        if state.snake.positions.include? position
+            return true
+        end
+        return false
     end
 
     def move_snake_to(state, next_position)
+        new_positions = [next_position] + state.snake.positions[0...-1]
+        state.snake.positions = new_positions
+        state
     end
 
     def end_game(state)
+        state.game_over = true
+        state
     end
 end
