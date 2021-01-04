@@ -16,6 +16,7 @@ module View
         end
 
         def render(state)
+            clear
             render_food(state)
             render_snake(state)
         end

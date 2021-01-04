@@ -32,15 +32,10 @@ module Actions
 
     def self.position_is_valid?(state, position)
         # Verificar que la posición esté dentro del Grid
-        if ((position.row < state.grid.rows && position.row >= 0) || 
-            (position.col < state.grid.cols && position.col >= 0))
-            return true
-        end
+        is_invalid = ((position.row >= state.grid.rows || position.row < 0) || (position.col >= state.grid.cols || position.col < 0))
+        return false if is_invalid
         # Verificar que la posición no se superponga a la serpiente
-        if state.snake.positions.include? position
-            return true
-        end
-        return false
+        return !(state.snake.positions.include? position)
     end
 
     def self.move_snake_to(state, next_position)
