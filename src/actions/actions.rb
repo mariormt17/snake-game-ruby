@@ -86,8 +86,22 @@ module Actions
     end
 
     def self.generate_food(state)
-        new_food = Model::Food.new(rand(state.grid.rows), rand(state.grid.cols))
+        x_axis = 0
+        y_axis = 0
+        loop do
+            band = false
+            x_axis = rand(state.grid.rows)
+            y_axis = rand(state.grid.cols)
+            state.snake.positions.each do |pos|
+                if(pos.row != x_axis && pos.col != y_axis)
+                    band = true
+                end
+            end
+            break if band
+        end
+        new_food = Model::Food.new(x_axis, y_axis)
         state.food = new_food
+        state.calculate_speed!
         state
     end
 end

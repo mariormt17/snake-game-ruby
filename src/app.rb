@@ -23,7 +23,7 @@ class App
             end
             @state = Actions::move_snake(@state)
             @view.render(@state)
-            sleep 0.5
+            sleep @state.speed
         end
     end
 

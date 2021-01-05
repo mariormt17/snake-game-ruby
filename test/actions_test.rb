@@ -13,7 +13,8 @@ class ActionTest < Minitest::Test
             Model::Food.new(4,4),
             Model::Grid.new(8,12),
             Model::Direction::DOWN,
-            false
+            false,
+            0.5
         )
     end
     
@@ -26,7 +27,8 @@ class ActionTest < Minitest::Test
             Model::Food.new(4,4),
             Model::Grid.new(8,12),
             Model::Direction::DOWN,
-            false
+            false,
+            0.5
         )
 
         actual_state = Actions::move_snake(@initial_state)
@@ -42,7 +44,8 @@ class ActionTest < Minitest::Test
             Model::Food.new(4,4),
             Model::Grid.new(8,12),
             Model::Direction::DOWN,
-            false
+            false,
+            0.5
         )
 
         actual_state = Actions::change_direction(@initial_state, Model::Direction::UP)
@@ -58,7 +61,8 @@ class ActionTest < Minitest::Test
             Model::Food.new(4,4),
             Model::Grid.new(8,12),
             Model::Direction::RIGHT,
-            false
+            false,
+            0.5
         )
 
         actual_state = Actions::change_direction(@initial_state, Model::Direction::RIGHT)
@@ -74,7 +78,8 @@ class ActionTest < Minitest::Test
             Model::Food.new(2,1),
             Model::Grid.new(8,12),
             Model::Direction::DOWN,
-            false
+            false,
+            0.5
         )
 
         actual_state = Actions::move_snake(initial_state)
@@ -94,7 +99,8 @@ class ActionTest < Minitest::Test
             Model::Food.new(2,1),
             Model::Grid.new(8,12),
             Model::Direction::DOWN,
-            false
+            false,
+            0.5
         )
 
         expected_state = Model::State.new(
@@ -106,7 +112,8 @@ class ActionTest < Minitest::Test
             Model::Food.new(0,0),
             Model::Grid.new(8,12),
             Model::Direction::DOWN,
-            false
+            false,
+            0.5
         )
 
         Actions.stub(:rand, 0) do
