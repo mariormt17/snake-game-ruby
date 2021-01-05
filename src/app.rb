@@ -23,7 +23,7 @@ class App
 
     def send_action(action, params)
         new_state = Actions::send(action, @state, params)
-        if new_state.hash != @state
+        if new_state.hash != @state.hash
             @state = new_state
             @view.render(@state)
         end
