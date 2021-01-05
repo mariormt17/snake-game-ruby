@@ -21,6 +21,7 @@ module View
 
         def render(state)
             clear
+            close if state.game_over
             render_food(state)
             render_snake(state)
         end
