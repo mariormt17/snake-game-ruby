@@ -1,4 +1,5 @@
 require "minitest/autorun"
+require "minitest/mock"
 require_relative "../src/actions/actions.rb"
 require_relative "../src/model/state.rb"
 
@@ -82,5 +83,35 @@ class ActionTest < Minitest::Test
             Model::Coordinate.new(1,1),
             Model::Coordinate.new(0,1)
         ])
+    end
+
+    def test_generate_food
+        initial_state = Model::State.new(
+            Model::Snake.new([
+                Model::Coordinate.new(1,1),
+                Model::Coordinate.new(0,1)
+            ]),
+            Model::Food.new(2,1),
+            Model::Grid.new(8,12),
+            Model::Direction::DOWN,
+            false
+        )
+
+        expected_state = Model::State.new(
+            Model::Snake.new([
+                Model::Coordinate.new(2,1),
+                Model::Coordinate.new(1,1),
+                Model::Coordinate.new(0,1)
+            ]),
+            Model::Food.new(0,0),
+            Model::Grid.new(8,12),
+            Model::Direction::DOWN,
+            false
+        )
+
+        Actions.stub(:rand, 0) do
+            actual_state = Actions::move_snake(initial_state)
+            assert_equal(actual_state, expected_state)
+        end
     end
 end
